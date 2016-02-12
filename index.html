@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js - The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Zachary Welch">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/kabu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+      .danger { color: #ee6565; }
+      .success { color: #56b881; }
+      .strikethrough { text-decoration: line-through; }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>Rails-API</h1>
+          <p>
+            <small>by <a href="mailto:zachary.welch@careerbuilder.com">zachary welch</a> / <a href="http://cb-kabu.herokuapp.com/team.html">wannabe hokage</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h2>
+            Users API in <span class='success'>1 minute</span>
+          </h2>
+        </section>
+
+        <section data-background-video="video/api-60-seconds.mov">
+        </section>
+
+        <section data-background="#3887be" data-background-transition="zoom">
+          <h2>Inspiration</h2>
+        </section>
+
+        <section data-transition="convex">
+          <section>
+            <img height="640" data-src="img/itunes.png" alt="itunes">
+          </section>
+          
+          <section>
+            <a href='https://cagit.careerbuilder.com/zwelch/rails-api'><img width="400" data-src="img/rails-api.png" alt="rails api"></a>
+          </section>
+        </section>
+
+        <section data-background="#418B61" data-background-transition="zoom">
+          <h2>Models</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>Associations</h2>
+            <img data-src="img/artist-1.png" alt="artist">
+          </section>
+          <section>
+            <img data-src="img/album.png" alt="album">
+          </section>
+          <section>
+            <img data-src="img/song.png" alt="song">
+          </section>
+          <section>
+            <img data-src="img/artist-2.png" alt="artist">
+          </section>
+          <section>
+            <img data-src="img/associations-terminal-1.png" alt="">
+          </section>
+          <section>
+            <img data-src="img/associations-terminal-2.png" alt="">
+          </section>
+          <section>
+            <img data-src="img/associations-terminal-3.png" alt="">
+          </section>
+        </section>
+
+        <section>
+          <h2>Validations</h2>
+        </section>
+
+        <section data-background-video="video/validations.mov">
+        </section>
+
+        <section data-transition='fade'>
+          <h2>Scopes!!!</h2>
+        </section>
+        
+        <section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  featured   :boolean          default("f")
+              #  rank       :integer
+              
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  featured   :boolean          default("f")
+              #  rank       :integer
+              
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                scope :featured, -> { where(featured: true) }
+              end 
+              ```
+            </script>
+          </section>
+          <section data-background-video="video/featured.mov" data-transition='none'>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  featured   :boolean          default("f")
+              #  rank       :integer
+              
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                scope :featured, -> { where(featured: true) }
+                scope :ranked, -> { order(:rank) }
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  featured   :boolean          default("f")
+              #  rank       :integer
+              
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                scope :featured, -> { where(featured: true) }
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  featured   :boolean          default("f")
+              #  rank       :integer
+              
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                scope :featured, -> { where(featured: true) }
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+                scope :hot, -> { top(5) }
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  released_at :date
+              #  rank       :integer
+              
+              class Album < ActiveRecord::Base
+                belongs_to :artist
+                has_many :songs
+
+                validates :name, presence: true
+
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+                scope :hot, -> { top(5) }
+              end
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              #  name       :string
+              #  released_at :date
+              #  rank       :integer
+              
+              class Album < ActiveRecord::Base
+                belongs_to :artist
+                has_many :songs
+
+                validates :name, presence: true
+
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+                scope :hot, -> { top(5) }
+                scope :recent_releases, -> { where("released_at > ?", 1.month.ago) }
+              end
+              ```
+            </script>
+          </section>
+          <section data-background-video="video/scopes.mov" data-transition='none'>
+          </section>
+          <section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Artist < ActiveRecord::Base
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+                scope :hot, -> { top(5) }
+                # ...
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Album < ActiveRecord::Base
+                belongs_to :artist
+                has_many :songs
+
+                validates :name, presence: true
+
+                scope :ranked, -> { order(:rank) }
+                scope :top, ->(n) { ranked.limit(n) }
+                scope :hot, -> { top(5) }
+                # ...
+              end
+              ```
+            </script>
+          </section>
+          <section data-transition='none'>
+            <img data-src="img/concern.png" alt="">
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Artist < ActiveRecord::Base
+                include Ranking
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                # ...
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Album < ActiveRecord::Base
+                include Ranking
+                belongs_to :artist
+                has_many :songs
+
+                validates :name, presence: true
+
+                # ...
+              end
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## Adding Sugar
+
+              ```ruby
+              module Ranking
+                extend ActiveSupport::Concern
+
+                class_methods do    
+                  
+                  def has_ranking
+                    instance_eval do
+                      scope :ranked, -> { order(:rank) }
+                      scope :top, ->(n) { ranked.limit(n) }
+                      scope :hot, -> { top(5) }
+                    end
+                  
+                    class_eval do
+                      def hot?
+                        rank.between?(1, 5)
+                      end
+                    end
+                  end
+                end  
+              end
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Artist < ActiveRecord::Base
+                has_ranking
+                has_many :albums
+                has_many :songs, through: :albums
+
+                validates :name, presence: true
+
+                # ...
+              end 
+              ```
+            </script>
+          </section>
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class Album < ActiveRecord::Base
+                has_ranking
+                belongs_to :artist
+                has_many :songs
+
+                validates :name, presence: true
+
+                # ...
+              end
+              ```
+            </script>
+          </section>          
+        </section>
+
+        <section data-background="#418B61" data-background-transition="zoom">
+          <h2>Controllers</h2>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Scaffold
+
+              ```ruby
+              def create
+                @artist = Artist.new(artist_params)
+
+                respond_to do |format|
+                  if @artist.save
+                    format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+                    format.json { render :show, status: :created, location: @artist }
+                  else
+                    format.html { render :new }
+                    format.json { render json: @artist.errors, status: :unprocessable_entity }
+                  end
+                end
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ## Responders Gem
+
+              ```ruby
+              def create
+                @artist = Artist.new(artist_params)
+                @artist.save
+                respond_with(@artist)
+              end
+              ```
+            </script>
+          </section>
+
+          <section>
+            <img data-src="img/controllers.png" alt="controllers" width='640'>
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Collection routes
+
+              ```ruby
+              resources :artists do
+                get :featured, :ranked, :hot, on: :collection
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-transition='none'>
+            <img data-src="img/routes.png" alt="">
+          </section>
+
+          <section>
+            <img data-src="img/collection-routes.png" alt="" width='640'>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nested resources</h2>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Configuring routes
+
+              ```ruby
+              resources :artists do
+                resources :albums
+              end
+              resources :albums
+              ```
+            </script>
+          </section>
+          <section>
+            <img data-src="img/nested-resources.png" alt="">
+          </section>
+          <section>
+            <img data-src="img/nested-resource.png" alt="" width='640'>
+          </section>
+        </section>
+
+        <section data-background="#3887be" data-background-transition="zoom">
+          <h2>Views</h2>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## 
+
+              ```ruby
+              class ArtistsController < ApplicationController
+                before_action :set_artist, only: [:show, :update, :destroy]
+
+                def index
+                  @artists = Artist.all
+                  respond_with(@artists)
+                end
+
+                def show
+                  respond_with(@artist)
+                end
+
+                # ...
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ###### GET /artists
+
+              ```javascript
+              [
+                {
+                  "id": 1,
+                  "name": "OMI",
+                  "featured": true,
+                  "rank": 1
+                },
+                {
+                  "id": 2,
+                  "name": "Walk the Moon",
+                  "featured": false,
+                  "rank": 6
+                },
+                ...
+                {
+                  "id": 6,
+                  "name": "Natalie La Rose",
+                  "featured": true,
+                  "rank": 3
+                }
+              ]              
+              ```
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ###### GET /albums/1 &nbsp;&nbsp;:(
+
+              ```javascript
+              {
+                "id": 1,
+                "name": "Cheerleader (Felix Jaehn Remix Radio Edit)",
+                "released_at": "2016-02-06",
+                "artist_id": 1,
+                "rank": 1,
+                "created_at": "2015-07-16T13:08:14.152Z",
+                "updated_at": "2016-02-11T06:02:49.179Z"
+              }
+              ```
+            </script>
+          </section>
+          <section>
+            <img data-src="img/taeyang.png" alt="">
+          </section>          
+        </section>
+
+        <section>
+          <h2>Jbuilder</h2>
+        </section>
+
+        <section>
+          <section>
+            <img data-src="img/jbuilder-folders.png" alt="">
+          </section>          
+
+          <section data-markdown>
+            <script type="text/template">
+              ###### index.json.jbuilder
+
+              ```ruby
+              json.array!(@artists) do |artist|
+                json.extract! artist, :id, :name, :featured, :rank
+                json.url artist_url(artist, format: :json)
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ###### Get /artists
+
+              ```javascript              
+              [
+                {
+                  "id": 1,
+                  "name": "OMI",
+                  "featured": true,
+                  "rank": 1,
+                  "url": "http://localhost:3000/artists/1"
+                },
+                {
+                  "id": 2,
+                  "name": "Walk the Moon",
+                  "featured": false,
+                  "rank": 6,
+                  "url": "http://localhost:3000/artists/2"
+                },
+                ...
+                {
+                  "id": 6,
+                  "name": "Natalie La Rose",
+                  "featured": true,
+                  "rank": 3,
+                  "url": "http://localhost:3000/artists/6"
+                }
+              ]              
+              ```
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ###### show.json.jbuilder
+
+              ```ruby
+              json.extract! @album, :id, :name, :released_at, :artist_id, :rank, :created_at, :updated_at
+
+              json.songs @album.songs do |song|
+                json.extract! song, :id, :name, :album_id
+                json.url song_url(song, format: :json)
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ###### GET /albums/1
+
+              ```javascript              
+              {
+                "id": 1,
+                "name": "Cheerleader (Felix Jaehn Remix Radio Edit)",
+                "released_at": "2016-02-06",
+                "artist_id": 1,
+                "rank": 1,
+                "created_at": "2015-07-16T13:08:14.152Z",
+                "updated_at": "2016-02-11T06:02:49.179Z",
+                "songs": [
+                  {
+                    "id": 1,
+                    "name": "Cheerleader",
+                    "album_id": 1,
+                    "url": "http://localhost:3000/songs/1"
+                  }
+                ]
+              }
+              ```
+            </script>
+          </section>
+        </section>
+
+        <section data-background="#3887be" data-background-transition="zoom">
+          <h2>Specs</h2>
+        </section>
+
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Factories
+
+              ```ruby
+              
+              # spec/factories/artists.rb
+              FactoryGirl.define do
+                factory :artist do
+                  sequence(:name) { |n| "Artist #{n}" }
+                  sequence(:rank)
+                end
+              end
+              ```
+            </script>
+          </section>          
+
+          <section data-markdown>
+            <script type="text/template">
+              ## model specs
+
+              ```ruby
+              
+              # spec/models/artist_spec.rb
+              describe Artist do
+                
+                subject(:artist) { create :artist, name: "Foo" }
+
+                it { should respond_to(:name) }
+                it { should respond_to(:rank) }
+                it { should respond_to(:albums) }
+                it { should respond_to(:songs) }
+                
+                it { should be_valid }
+                it { should_not be_featured }
+                
+                it { should validate_presence_of(:name) }
+
+              ```
+            </script>
+          </section>          
+        </section>
+          
+        <section data-markdown>
+          <script type="text/template">
+            ## scopes
+
+            ```ruby
+            
+            # spec/models/artist_spec.rb
+            describe ".featured" do
+
+              it "includes featured artists" do
+                artist = create :artist, featured: true
+                expect(Artist.featured).to include artist
+              end
+
+              it "excludes artists not featured" do
+                artist = create :artist
+                expect(Artist.featured).to_not include artist
+              end
+            end
+            ```
+          </script>
+        </section>
+
+        <section>
+
+          <section>
+            <h2>Shared Examples</h2>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ```ruby
+              
+              shared_examples "ranked" do
+
+                let(:factory) { described_class.name.underscore.to_sym }
+
+                describe ".ranked" do
+                  
+                  before do
+                    create factory, rank: 2
+                    create factory, rank: 1
+                  end
+                  
+                  it "returns #{described_class.model_name.plural} by rank" do
+                    expect(described_class.ranked.first.rank).to be 1
+                    expect(described_class.ranked.second.rank).to be 2
+                  end
+                end
+
+                describe ".top(n)" do
+
+                  before do 
+                    10.times { |i| create(factory, rank: i + 1) }
+                  end
+                  
+                  it "returns the top n #{described_class.model_name.plural}" do
+                    expect(described_class.top(2).first.rank).to be 1
+                    expect(described_class.top(2).second.rank).to be 2
+                  end
+                end
+
+                describe ".hot" do
+
+                  before do 
+                    10.times { |i| create(factory, rank: i + 1) }
+                  end
+                  
+                  it "returns the top 5 #{described_class.model_name.plural}" do
+                    expect(described_class.hot.map(&:rank)).to eq [1,2,3,4,5]
+                  end
+                end  
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown data-transition='none'>
+            <script type="text/template">
+              ## shared examples
+
+              ```ruby
+              
+              # spec/models/artist_spec.rb
+              describe Artist do
+                
+                subject(:artist) { create :artist, name: "Foo" }
+
+                it_behaves_like "ranked"
+              ```
+            </script>
+          </section>
+        </section>
+
+        <section data-markdown data-transition='none'>
+          <script type="text/template">
+            ## integration specs
+
+            ```ruby
+            
+            # spec/requests/artists_spec.rb
+            describe "GET /artists" do
+              
+              before do
+                create_list :artist, 10
+                get '/artists'
+              end
+
+              it "returns artists" do
+                expect(response).to be_success
+                expect(json).to be_an(Array)
+                expect(json.length).to be 10
+              end
+            end
+            ```
+          </script>
+        </section>     
+
+        <section data-markdown data-transition='none'>
+          <script type="text/template">
+            ## integration specs
+
+            ```ruby
+            
+            # spec/requests/artists_spec.rb
+            describe "Artists API" do
+              
+              let(:json) { JSON.parse(response.body) }
+                
+              describe "GET /artists" do
+                
+                before do
+                  create_list :artist, 10
+                  get '/artists'
+                end
+
+                it "returns artists" do
+                  expect(response).to be_success
+                  expect(json).to be_an(Array)
+                  expect(json.length).to be 10
+                end
+              end
+
+              describe "GET /artists/:id" do
+                
+                let(:artist) { create :artist, name: "Foo", rank: 1 }
+                
+                before do
+                  get "/artists/#{artist.id}"
+                end
+
+                it "returns artist by id" do
+                  expect(response).to be_success
+                  expect(json["id"]).to be artist.id
+                end
+
+                it "returns artist with name" do
+                  expect(response).to be_success
+                  expect(json["name"]).to eq "Foo"
+                end
+
+                it "returns artist with featured" do
+                  expect(response).to be_success
+                  expect(json["featured"]).to be false
+                end
+
+                it "returns artist with rank" do
+                  expect(response).to be_success
+                  expect(json["rank"]).to be 1
+                end
+
+                it "returns 404 for artist that doesn't exist" do
+                  get '/artists/missing'
+                  expect(response).to be_missing
+                end
+              end
+
+              describe "POST /artists" do
+                
+                before do
+                  post '/artists', name: "Foo", featured: true
+                end
+
+                it "creates an artist" do
+                  expect(response).to be_created
+                  expect(json).to include "id"
+                  expect(json["name"]).to eq "Foo"
+                  expect(json["featured"]).to be true
+                end
+              end
+
+              describe "PUT /artists/:id" do
+                
+                let(:artist) { create :artist, name: "Foo" }
+
+                before do
+                  put "/artists/#{artist.id}", name: "Bar"
+                end
+
+                it "updates an artist" do
+                  expect(response).to be_success
+                  expect(json["name"]).to eq "Bar"
+                end
+              end
+
+              describe "DELETE /artists/:id" do
+                
+                let(:artist) { create :artist }
+                
+                before do
+                  delete "/artists/#{artist.id}"
+                end
+
+                it "deletes an artist" do
+                  expect(response).to be_success
+                  get "/artists/#{artist.id}"
+                  expect(response).to be_missing
+                end
+              end  
+
+              describe "GET /artists/featured" do
+                
+                before do
+                  create_list :artist, 10, featured: true
+                  get '/artists/featured'
+                end
+
+                it "returns artists" do
+                  expect(response).to be_success
+                  expect(json).to be_an(Array)
+                  expect(json.length).to be 10
+                end
+
+                it "returns artists that are featured" do
+                  expect(response).to be_success
+                  json.each do |artist|
+                    expect(artist["featured"]).to be true
+                  end 
+                end
+              end  
+
+              describe "GET /artists/ranked" do
+                
+                before do
+                  create_list :artist, 10
+                  get '/artists/ranked'
+                end
+
+                it "returns artists by rank" do
+                  expect(response).to be_success
+                  expect(json).to be_an(Array)
+                  expect(json.length).to be 10
+                end
+              end
+
+              describe "GET /artists/hot" do
+                
+                before do
+                  create_list :artist, 10
+                  get '/artists/hot'
+                end
+
+                it "returns top 5 artists" do
+                  expect(response).to be_success
+                  expect(json).to be_an(Array)
+                  expect(json.length).to be 5
+                end
+              end  
+            end
+            ```
+          </script>
+        </section>          
+
+        <section data-background="#418B61" data-background-transition="zoom">
+          <h2>Legacy Databases</h2>
+        </section>
+
+        <section data-markdown data-transition='none'>
+          <script type="text/template">
+            ## Customization
+
+            ```ruby
+            
+            class User < ActiveRecord::Base
+              self.table_name  = 'SiteData.dbo.HHTVUser'
+              self.primary_key = 'DID'
+
+              ROLE = { manager: 'MGR', member: 'MEM' }.freeze
+
+              alias_attribute :id, 'DID'
+              alias_attribute :first_name, 'FirstName'
+              alias_attribute :last_name, 'LastName'
+              alias_attribute :company, 'CompanyName'
+              alias_attribute :phone, 'Phone'
+              alias_attribute :email, 'Email'
+
+              alias_attribute :address, 'Address1'
+              alias_attribute :address2, 'Address2'
+              alias_attribute :city, 'CityName'
+              alias_attribute :state, 'StateName'
+              alias_attribute :postal_code, 'PostalCode'
+              alias_attribute :zip, 'Zip5'
+              alias_attribute :country, 'CountryName'
+
+              alias_attribute :last_login_on, 'LastLogin'
+            end
+            ```
+          </script>
+          <pre><code></code></pre>          
+        </section>     
+
+        <section data-background-transition="zoom">
+          <h2>Thanks!!!</h2>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
