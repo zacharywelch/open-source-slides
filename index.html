@@ -535,27 +535,45 @@ Initializing git repo in /Users/zwelch/sqlserver-sequence
 
         <section data-background="#3887be" data-background-transition="zoom">
           <h2>Pitfalls</h2>
+          <aside class='notes'>
+            So let's take a look at some of the pitfalls along the way
+          </aside>
         </section>
 
         <section data-background="#418B61">
           <h2>Testing</h2>
+          <aside class='notes'>
+            Believe it or not testing was the hardest challenge
+          </aside>
         </section>
 
         <section>
           <section>
-            <img src='img/sqlserver.png'>            
+            <img src='img/sqlserver.png'> 
+            <aside class='notes'>
+              There were a few tests that depended on SQL Server. However today SQL Server's only available on Windows. To mitigate that I funneled code that relied on proprietary T-SQL into a separate method which could then be stubbed elsewhere in the tests. Still there's one test that depends on SQL Server which presents a challenge if you're looking for outside contributions.
+            </aside>
           </section>
           
           <section data-transition='fade'>
             <img src='img/travisci.png'>
+            <aside class='notes'>
+              In a similar vein I needed something for continuous integration but many of the free hosted services don't support Windows.
+            </aside>
           </section>
 
           <section data-transition='fade'>
             <img src='img/teamcity.png'>
+            <aside class='notes'>
+              I looked at free services for Team City but the restrictions were bizarre and prohibitive.
+            </aside>
           </section>
 
           <section data-transition='fade'>
             <img src='img/appveyor.png'>
+            <aside class='notes'>
+              One provider that did look promising was Appveyor, which is what sqlserver-adapter happens to be using. I've also seen it written on some whiteboards downstairs so perhaps site is using it? This is one area where I would definitely appreciate some help if you're interested.
+            </aside>
           </section>
         </section>
 
