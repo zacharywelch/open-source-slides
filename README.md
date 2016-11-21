@@ -1,18 +1,14 @@
-# slides-rails-api
+# open-source-slides
 
-Slides on rails-api. 
+Slides on Sqlserver::Sequence: An Open-Source Journey.
 
 Designed with [reveal.js](http://lab.hakim.se/reveal-js/#/).
 
-#### More reading:
-- [sample app](https://cagit.careerbuilder.com/zwelch/rails-api): Sample music API using Rails.
-- [rails-api-template](https://cagit.careerbuilder.com/zwelch/rails-api-template): A rails application template for APIs.
-
 ## Usage
 
-1. Clone the slides-rails-api repository
+1. Clone the slides-open-source repository
    ```sh
-   $ git clone git@cagit.careerbuilder.com:zwelch/slides-rails-api.git
+   $ git clone git@github.com:zacharywelch/open-source-slides.git
    ```
 
 2. Open index.html in a browser
@@ -25,14 +21,14 @@ Some reveal.js features, like external Markdown and speaker notes, require that 
 
 2. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
 
-4. Clone the slides-rails-api repository
+4. Clone the open-source-slides repository
    ```sh
-   $ git clone git@cagit.careerbuilder.com:zwelch/slides-rails-api.git
+   $ git clone git@github.com:zacharywelch/open-source-slides.git
    ```
 
 5. Navigate to the slides-rails-api folder
    ```sh
-   $ cd slides-rails-api
+   $ cd open-source-slides
    ```
 
 6. Install dependencies

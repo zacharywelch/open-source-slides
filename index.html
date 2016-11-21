@@ -64,7 +64,7 @@
         </section>
 
         <section>
-          <img src='img/rubygems.png'>
+          <img src='img/rubygems2.png'>
           <aside class='notes'>
             So sqlserver-sequence was published in July. It was our first open-source project on RubyGems.org. Since then it’s enjoyed around a thousand downloads.
           </aside>
@@ -108,7 +108,7 @@ $ other_checkout.order_id
 <pre>
 <code data-trim data-noescape>
 class Checkout < ActiveRecord::Base
-  sequence :order_id<mark class='fragment'>, name: 'contract_id'</mark><mark class='fragment'>,
+  sequence :order_id, name: 'contract_id'<mark class='fragment'>,
                       prefix: 'CT-'</mark><mark class='fragment'>,
                       format: lambda { |n| n.rjust(8, 0) }</mark>
 end
@@ -256,26 +256,7 @@ $ other_checkout.order_id
           </aside>
         </section>
 
-        <section>
-<!--           <section data-markdown>
-            <script type="text/template">
-              #### rails plugin
-
-              ```
-              > rails plugin new sqlserver-sequence
-              ```
-            </script>
-          </section>
-          <section data-markdown>
-            <script type="text/template">
-              #### Jeweler Gem
-
-              ```
-              > jeweler sqlserver-sequence
-              ```
-            </script>
-          </section>
- -->          
+        <section> 
           <section>
             <h4>Bundler</h4>
 <pre>
@@ -394,7 +375,7 @@ end
 
           <section>
             <h3>Why dedicate time up-front?</h3>
-            <ul>
+            <ol>
               <li class='fragment'>
                 quickly go through different <span class='success'>use cases</span>
               </li>
@@ -410,7 +391,7 @@ end
               <li class='fragment'>
                 <span class='success'>0</span> lines of code
               </li>
-            </ul> 
+            </ol> 
             <aside class='notes'>
               designing for the ideal
             </aside>
@@ -432,15 +413,12 @@ end
               <h3>TDD now</h3>
               <h4>You'll Thank Yourself Later :)</h4>
             </div>
-            <aside class='note'>
+<!--             <aside class='note'>
                May seem cute but try finding a successful open-source project in Ruby without tests. Quality can make or break a gem so it's important the code be well-tested.
-            </aside>
+            </aside>            
+ -->          
           </section>
 
-<!--           <section data-transition='fade'>
-            <img src='img/loc.png'>        
-          </section>
- -->
           <section data-transition='fade'>
             <h4>Names are worth their weight in <span class='warning'>$</span>gold<span class='warning'>$</span></h4>
             <img src='img/variables.png'>        
@@ -451,29 +429,12 @@ end
         </section>
 
         <section data-background="#418B61">
-          <h2>Convention Over Configuration</h2>
-        </section>
-
-        <section>
-          <section data-transition='fade'>
-            <img src='img/convention-1.png'>
-          </section>
-          <section data-transition='fade'>
-            <img src='img/convention-2.png'>
-          </section>
-          <section data-transition='fade'>
-            <img src='img/convention-3.png'>
-          </section>
-          <section data-transition='fade'>
-            <img src='img/convention-4.png'>
-          </section>
-        </section>
-        
-        <section data-background="#418B61">
           <h2>Documentation</h2>
-          <aside class='note'>
+
+<!--           <aside class='note'>
              A key differentiator for open-source projects is documentation. Documentation can make or break developer adoption. If two projects provide the same level of functionality and one has great documentation, the other doesn't. Guess which one developers are more likely to choose?
           </aside>
+ -->
         </section>
 
         <section>
@@ -709,7 +670,7 @@ Initializing git repo in /Users/zwelch/sqlserver-sequence
           </section>
 
           <section>
-            <h3>Sharing is caring</h3>
+            <h3>💜 Sharing is caring 💜</h3>
           </section>
         </section>
 
